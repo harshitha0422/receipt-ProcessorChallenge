@@ -1,11 +1,10 @@
 package utils
 
 import (
-	
 	"testing"
-	"github.com/stretchr/testify/assert"
+
 	"github.com/processortest/models"
-	"github.com/processortest/utils"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestCalculatePoints_FailureCase(t *testing.T) {
@@ -22,12 +21,12 @@ func TestCalculatePoints_FailureCase(t *testing.T) {
 	}
 
 	// Call CalculatePoints function
-	points, _ := utils.CalculatePoints(receipt)
+	points, _ := CalculatePoints(receipt)
 
 	// Assert that there is an error and points are 0
-	
+
 	assert.NotEqual(t, 0, points)
-	
+
 }
 
 func TestCalculatePoints_SuccessCase(t *testing.T) {
@@ -44,11 +43,10 @@ func TestCalculatePoints_SuccessCase(t *testing.T) {
 	}
 
 	// Call CalculatePoints function
-	points, _ := utils.CalculatePoints(receipt)
+	points, _ := CalculatePoints(receipt)
 
 	// Assert that there is no error and points are calculated as expected
 
 	assert.Equal(t, 113, points)
 
-	
 }

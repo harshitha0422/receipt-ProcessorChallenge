@@ -1,22 +1,21 @@
 package utils
 
 import (
-	
-	
 	"fmt"
-    "sync"
-    "time"
 	"math"
-	"strings"
 	"strconv" // Add import for strconv package
+	"strings"
+	"sync"
+	"time"
+
 	"github.com/processortest/models"
 )
 
 var receiptsMutex sync.Mutex
 
 // CalculatePoints calculates the points for a given receipt based on the specified rules.
-func CalculatePoints(receipt models.Receipt) (int,error) {
-    points := 0
+func CalculatePoints(receipt models.Receipt) (int, error) {
+	points := 0
 
 	// Rule: One point for every alphanumeric character in the retailer name.
 	points += len(strings.ReplaceAll(receipt.Retailer, " ", ""))
@@ -40,11 +39,11 @@ func CalculatePoints(receipt models.Receipt) (int,error) {
 		trimmedLength := len(strings.TrimSpace(item.ShortDescription))
 		if trimmedLength%3 == 0 {
 			price, err := strconv.ParseFloat(item.Price, 64)
-            if err != nil {
-                // Handle parsing error
+			if err != nil {
+				// Handle parsing error
 				return 0, fmt.Errorf("failed to parse price: %w", err)
-                // continue
-            }
+				// continue
+			}
 			points += int(math.Ceil(price * 0.2))
 		}
 	}
@@ -89,5 +88,5 @@ func parseTotal(total string) float64 {
 
 // GenerateReceiptID generates a unique ID for a receipt.
 func GenerateReceiptID() string {
-    return fmt.Sprintf("%x", time.Now().UnixNano())
+	return fmt.Sprintf("%x", time.Now().UnixNano())
 }
